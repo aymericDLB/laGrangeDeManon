@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const handlebars = require('handlebars');
-var cron = require('node-cron');
 
 const MailService = require('../services/mailService');
 const PlanningService = require('../services/planningService');
