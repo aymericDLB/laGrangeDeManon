@@ -17,4 +17,6 @@ router.put('/planning/:id', planningController.updatePlanning);
 // Supprimer un planning
 router.delete('/planning/:id', planningController.deletePlanning);
 
+// router.put('/planningNotation/:id', planningController.updatePlanningNotation);
+
 module.exports = router;

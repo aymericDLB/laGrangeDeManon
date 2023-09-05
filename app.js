@@ -5,7 +5,7 @@ const http = require('http');
 
 
 // Définition des Routes
-const userRoutes = require('./routes/userRoutes');
+//const userRoutes = require('./routes/userRoutes');
 const reservationRoutes = require('./routes/reservationRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const loginRoutes = require('./routes/loginRoutes');
@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 
 // Utilisations des Routes
-app.use(userRoutes);
+//app.use(userRoutes);
 app.use(reservationRoutes);
 app.use(messageRoutes);
 app.use(loginRoutes);
@@ -30,8 +30,6 @@ app.use(planningRoutes);
 app.use(mailRoutes);
 
 app.use(cors({origin: '*'}));
-//app.use(express.static('public/frontend'));
-
 
 app.use(express.static(path.join(__dirname, '/dist')));
 
@@ -41,12 +39,3 @@ app.get('*', (req, res) => {
 });
 
 module.exports = app;
-// Démarrer le serveur
-// const port = process.env.PORT || 3000;
-// app.listen(port, () => {
-//   console.log(`Serveur Node.js en cours d'exécution sur le port ${port}`);
-// });
-
-// app.listen(port, () => {
-//   console.log(`Serveur démarré sur le port ${port}`);
-// });

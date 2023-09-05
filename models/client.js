@@ -25,19 +25,19 @@ const Client = sequelize.define('Client', {
   },
   telephone: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   adresse: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: true,
   },
   ville: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   codePostale: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
 }, {
   tableName: 'client',

@@ -1,8 +1,10 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const handlebars = require('handlebars');
+var cron = require('node-cron');
 
 const MailService = require('../services/mailService');
+const PlanningService = require('../services/planningService');
 
 async function demandeReservationMail(req, res) {
     try {
@@ -42,15 +44,26 @@ async function demandeReservationEnAttenteMail(req, res) {
     sendMail('demandeReservationEnAttenteMail', '⛰️ La grange de Manon - Réservation en attente ⛰️');
 }
 
+async function getListesReservationsNonNote(req, res) {
+    try {
+        const reservationsId = await MailService.relancerClientAvisReservation();
+        res.json(reservationsId);
+      } catch (error) {
+        console.error('Erreur lors de getListesReservationsNonNote:', error);
+        res.status(500).json({ error: 'Erreur lors de getListesReservationsNonNote.' });
+      }
+}
+
 async function reservationTermine(req, res) {
     try {
         const { id } = req.params;
         const reservation = await MailService.infoReservation(id);
+        sendMail('reservationTermine', '⛰️ La Grange de Manon - Votre avis nous intéresse ⛰️', reservation);
         res.status(200).send({
             status: "200",
             message: 'Mail Sent!'
         });
-        sendMail('reservationTermine', '⛰️ La Grange de Manon - Votre avis nous intéresse ⛰️', reservation);
+        await PlanningService.updatePlanningNotation(id);
       } catch (error) {
         console.error('Erreur lors de la récupération de la réservation:', error);
         res.status(500).json({ error: 'Erreur lors de la récupération de la réservation.' });
@@ -110,23 +123,32 @@ function sendMail(cheminTemplate, objetDuMail, dataReservation) {
       
         // Générer le contenu HTML à partir des données
         const emailContent = template(data);
+
+        var piecesJointes;
+        // Permet d'envoie un mail avec pièce jointe seulement à ce type d'email
+        if (cheminTemplate == "demandeReservationValide") {
+            piecesJointes = [
+                { filename: 'Contrat_La_Grange_De_Manon.docx', path: './assets/piecesJointes/Contrat_La_Grange_De_Manon.docx'},
+                { filename: 'Contrat_La_Grange_De_Manon.pdf', path: './assets/piecesJointes/Contrat_La_Grange_De_Manon.pdf'}
+              ]
+        }else {
+            piecesJointes = [];
+        }
+
         //dataReservation.Client.email
         const mailOptions = {
           from: 'metns.974@gmail.com',
           to: 'aymeric.delabarre@gmail.com',
           subject: objetDuMail,
           html: emailContent,
-          attachments: [
-            { filename: 'Contrat_La_Grange_De_Manon.docx', path: './assets/piecesJointes/Contrat_La_Grange_De_Manon.docx'},
-            { filename: 'Contrat_La_Grange_De_Manon.pdf', path: './assets/piecesJointes/Contrat_La_Grange_De_Manon.pdf'}
-          ]
+          attachments: piecesJointes
         };
       
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
             console.log('Erreur lors de l\'envoi de l\'e-mail:', error);
           } else {
-            console.log('E-mail envoyé avec succès:', info.response);
+            console.log('E-mail envoyé avec succès:');
           }
         });
     });
@@ -214,6 +236,7 @@ module.exports = {
     demandeReservationMail,
     demandeReservationValideMail,
     demandeReservationEnAttenteMail,
-    reservationTermine
+    reservationTermine,
+    getListesReservationsNonNote
 };
   

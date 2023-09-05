@@ -11,4 +11,6 @@ router.post('/demandeReservationEnAttenteMail', mailController.demandeReservatio
 
 router.post('/reservationTermine/:id', mailController.reservationTermine);
 
+router.get('/recupererReservationNonNote', mailController.getListesReservationsNonNote);
+
 module.exports = router;

@@ -17,7 +17,7 @@ async function getPlannings() {
     include: [{
       model: Reservation,
       required: true,
-      attributes: ['idReservation', 'idClient', 'dateDebReservation', 'dateFinReservation', 'dateInsertion'],
+      attributes: ['idReservation', 'idClient', 'dateDebReservation', 'adulte', 'enfant', 'etat', 'prix', 'acompte', 'dateFinReservation', 'dateInsertion'],
       where: {
         dateFinReservation: {
           [Op.gte]: new Date()
@@ -61,10 +61,30 @@ async function deletePlanning(id) {
   return null;
 }
 
+// Mettre à jour la notation d'un planning par son idReservation
+async function updatePlanningNotation(id) {
+  const planning = await Planning.findOne(
+    { where: 
+      { idReservation: 
+        {
+          [Op.eq]: id
+        } 
+      } 
+    }
+  );
+  if (planning) {
+    await planning.update({ notation: 1 });
+    await planning.save()
+    return planning;
+  }
+  return null;
+}
+
 module.exports = {
   createPlanning,
   getPlannings,
   getPlanningById,
   updatePlanning,
   deletePlanning,
+  updatePlanningNotation
 };

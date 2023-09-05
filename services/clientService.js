@@ -11,7 +11,10 @@ async function createClient(clientData) {
   // Vérification si l'adresse e-mail existe déjà
   const existingClient = await Client.findOne({
     attributes: ['idClient'],
-    where: { email: clientData.email } 
+    where: { 
+      email: clientData.email,
+      nom: clientData.nom
+    } 
   });
   if (existingClient) {
     return existingClient;

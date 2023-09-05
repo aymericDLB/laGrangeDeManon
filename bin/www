@@ -8,6 +8,30 @@ var app = require('../app');
 var debug = require('debug')('helloworld:server');
 var http = require('http');
 
+var cron = require('node-cron');
+var axios = require('axios');
+
+// Tache plannifié d'envoie de mail de notation
+cron.schedule('0 12 * * *', () =>  {
+
+  axios.get('http://localhost:3000/recupererReservationNonNote')
+  .then(response => {
+      response.data.forEach(element => {
+        axios.post('http://localhost:3000/reservationTermine/' + element.idReservation, {})
+        .then(response => {
+          console.log('Requête POST réussie');
+        })
+        .catch(error => {
+          console.error('Erreur lors de la requête POST', error);
+        });
+      });
+  })
+  .catch(error => {
+    console.error('Erreur lors de la requête POST', error);
+  });
+});
+
+
 /**
  * Get port from environment and store in Express.
  */

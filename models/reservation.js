@@ -26,11 +26,11 @@ const Reservation = sequelize.define('Reservation', {
   },
   adulte: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   enfant: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   etat: {
     type: DataTypes.STRING,
@@ -38,11 +38,11 @@ const Reservation = sequelize.define('Reservation', {
   },
   prix: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   acompte: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   dateInsertion: {
     type: DataTypes.DATE,

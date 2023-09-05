@@ -73,6 +73,22 @@ async function deletePlanning(req, res) {
   }
 }
 
+// async function updatePlanningNotation(req, res) {
+//   try {
+//     const { id } = req.params;
+//     const planningData = req.body;
+//     const planning = await PlanningService.updatePlanningNotation(id, planningData);
+//     if (planning) {
+//       res.json(planning);
+//     } else {
+//       res.status(404).json({ error: 'Planning non trouvée.' });
+//     }
+//   } catch (error) {
+//     console.error('Erreur lors de la mise à jour du planning:', error);
+//     res.status(500).json({ error: 'Erreur lors de la mise à jour du planning.' });
+//   }
+// }
+
 module.exports = {
   createPlanning,
   getPlannings,

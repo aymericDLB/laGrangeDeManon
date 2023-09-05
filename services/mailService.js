@@ -1,9 +1,8 @@
 const Client = require('../models/client');
 const Reservation = require('../models/reservation');
 const Planning = require('../models/planning');
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 
-// Créer un client
 async function infoReservation(idReservation) {
     const reservation = await Reservation.findByPk(idReservation,{
         include: [{
@@ -16,6 +15,29 @@ async function infoReservation(idReservation) {
   return reservation;
 }
 
+async function relancerClientAvisReservation() {
+  const reservation = await Reservation.findAll({
+      include: [{
+        model: Planning,
+        required: true,
+        where: {
+          notation: {
+            [Op.eq]: 0,
+          }
+        }
+       }
+      ],
+      attributes: ['idReservation'],
+      where: {
+        dateFinReservation: {
+          [Op.lt]: new Date()
+        }
+      }
+    });
+return reservation;
+}
+
 module.exports = {
-    infoReservation
+    infoReservation,
+    relancerClientAvisReservation
   };
