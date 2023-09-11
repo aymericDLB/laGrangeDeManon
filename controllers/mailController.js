@@ -137,7 +137,7 @@ function sendMail(cheminTemplate, objetDuMail, dataReservation) {
         //dataReservation.Client.email
         const mailOptions = {
           from: 'metns.974@gmail.com',
-          to: 'aymeric.delabarre@gmail.com',
+          to: 'lagrangedemanon@gmail.com',
           subject: objetDuMail,
           html: emailContent,
           attachments: piecesJointes
