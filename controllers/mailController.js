@@ -123,24 +123,12 @@ function sendMail(cheminTemplate, objetDuMail, dataReservation) {
         // Générer le contenu HTML à partir des données
         const emailContent = template(data);
 
-        var piecesJointes;
-        // Permet d'envoie un mail avec pièce jointe seulement à ce type d'email
-        if (cheminTemplate == "demandeReservationValide") {
-            piecesJointes = [
-                { filename: 'Contrat_La_Grange_De_Manon.docx', path: './assets/piecesJointes/Contrat_La_Grange_De_Manon.docx'},
-                { filename: 'Contrat_La_Grange_De_Manon.pdf', path: './assets/piecesJointes/Contrat_La_Grange_De_Manon.pdf'}
-              ]
-        }else {
-            piecesJointes = [];
-        }
-
         //dataReservation.Client.email
         const mailOptions = {
           from: 'metns.974@gmail.com',
-          to: 'lagrangedemanon@gmail.com',
+          to: 'aymeric.delabarre@gmail.com',
           subject: objetDuMail,
-          html: emailContent,
-          attachments: piecesJointes
+          html: emailContent
         };
       
         transporter.sendMail(mailOptions, function (error, info) {

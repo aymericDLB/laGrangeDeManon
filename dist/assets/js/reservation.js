@@ -6,12 +6,12 @@ function myReservation(params, params2) {
     params2.forEach(elm => {
       var splitedDateDeb = elm.dateDebReservation.split("-");
       var yearDateDeb = splitedDateDeb[0];
-      var monthDateDeb = parseInt(splitedDateDeb[1] -1 ).toString();
+      var monthDateDeb = parseInt(splitedDateDeb[1] -1).toString();
       var dayDateDeb = parseInt(splitedDateDeb[2]).toString();
 
       var splitedDateFin = elm.dateFinReservation.split("-");
       var yearDateFin = splitedDateFin[0];
-      var monthDateFin = parseInt(splitedDateFin[1] -1 ).toString();
+      var monthDateFin = parseInt(splitedDateFin[1]-1).toString();
       var dayDateFin = parseInt(splitedDateFin[2]).toString();
 
       var dateFinal = {
@@ -75,7 +75,6 @@ function myReservation(params, params2) {
 
 function myPlanning(params) {
 
-  var datesResa = [];
   var dateHighlightPlanning = [];
   var dateTooltipPlanning = [];
   var colorTab = ['#3943fe','#597e22','#5c0377','#05555d','#8a501b','#3f3c27','#08157a','#7a31f3','#868ff8','#e24373','#e36f74','#ea0b62','#eea228','#72422d','#9dc2b6',
@@ -83,14 +82,14 @@ function myPlanning(params) {
 
   params.forEach(elm => {
     var splitedDateDeb = elm.dateDebReservation.split("-");
-    var yearDateDeb = splitedDateDeb[0];
-    var monthDateDeb = parseInt(splitedDateDeb[1]  ).toString();
-    var dayDateDeb = parseInt(splitedDateDeb[2]).toString();
+    var yearDateDeb = splitedDateDeb[2].toString();
+    var monthDateDeb = parseInt(splitedDateDeb[1]).toString();
+    var dayDateDeb = parseInt(splitedDateDeb[0]).toString();
 
     var splitedDateFin = elm.dateFinReservation.split("-");
-    var yearDateFin = splitedDateFin[0];
-    var monthDateFin = parseInt(splitedDateFin[1]  ).toString();
-    var dayDateFin = parseInt(splitedDateFin[2]).toString();
+    var yearDateFin = splitedDateFin[2];
+    var monthDateFin = parseInt(splitedDateFin[1]).toString();
+    var dayDateFin = parseInt(splitedDateFin[0]).toString();
 
     const chiffreRandom = Math.floor(Math.random() * 31);
     //const randomColor = Math.floor(Math.random()*16777215).toString(16);
