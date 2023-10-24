@@ -3,14 +3,14 @@ const router = express.Router();
 const mailController = require('../controllers/mailController');
 
 
-router.post('/demandeReservationMail/:id', mailController.demandeReservationMail);
+router.post('/api/demandeReservationMail/:id', mailController.demandeReservationMail);
 
-router.post('/demandeReservationValideMail/:id', mailController.demandeReservationValideMail);
+router.post('/api/demandeReservationValideMail/:id', mailController.demandeReservationValideMail);
 
-router.post('/demandeReservationEnAttenteMail', mailController.demandeReservationEnAttenteMail);
+router.post('/api/demandeReservationEnAttenteMail', mailController.demandeReservationEnAttenteMail);
 
-router.post('/reservationTermine/:id', mailController.reservationTermine);
+router.post('/api/reservationTermine/:id', mailController.reservationTermine);
 
-router.get('/recupererReservationNonNote', mailController.getListesReservationsNonNote);
+router.get('/api/recupererReservationNonNote', mailController.getListesReservationsNonNote);
 
 module.exports = router;

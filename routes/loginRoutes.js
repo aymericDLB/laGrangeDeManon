@@ -5,7 +5,7 @@ const router = express.Router();
 const loginController = require('../controllers/loginController');
 
 // Créer un message
-router.post('/login', loginController.login);
+router.post('/api/login', loginController.login);
 
 
 module.exports = router;

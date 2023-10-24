@@ -7,10 +7,10 @@ const router = express.Router();
 
 // Routes pour les opérations CRUD sur les utilisateurs
 
-router.post('/users', userController.createUser);
-router.get('/users', userController.getUsers);
-router.get('/users/:id', userController.getUserById);
-router.put('/users/:id', userController.updateUser);
-router.delete('/users/:id', userController.deleteUser);
+router.post('/api/users', userController.createUser);
+router.get('/api/users', userController.getUsers);
+router.get('/api/users/:id', userController.getUserById);
+router.put('/api/users/:id', userController.updateUser);
+router.delete('/api/users/:id', userController.deleteUser);
 
 module.exports = router;

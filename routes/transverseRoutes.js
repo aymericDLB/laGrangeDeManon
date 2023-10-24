@@ -5,10 +5,10 @@ const router = express.Router();
 const transverseController = require('../controllers/transverseController');
 
 
-router.get('/accueil-back', transverseController.accueilBack);
+router.get('/api/accueil-back', transverseController.accueilBack);
 
 //Récupère le nombre de réservation d'un client
-router.get('/reservations/client/:id', transverseController.nbResaClient);
+router.get('/api/reservations/client/:id', transverseController.nbResaClient);
 
 
 module.exports = router;

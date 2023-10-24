@@ -14,10 +14,10 @@ var axios = require('axios');
 // Tache plannifié d'envoie de mail de notation
 cron.schedule('0 12 * * *', () =>  {
 
-  axios.get('http://localhost:3000/recupererReservationNonNote')
+  axios.get('http://localhost:3000/api/recupererReservationNonNote')
   .then(response => {
       response.data.forEach(element => {
-        axios.post('http://localhost:3000/reservationTermine/' + element.idReservation, {})
+        axios.post('http://localhost:3000/api/reservationTermine/' + element.idReservation, {})
         .then(response => {
           console.log('Requête POST réussie');
         })
