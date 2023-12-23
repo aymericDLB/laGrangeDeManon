@@ -52,11 +52,21 @@ app.use(mailRoutes);
 
 app.use(cors({origin: '*'}));
 
-app.use(express.static(path.join(__dirname, '/dist')));
+app.use(express.static(path.join(__dirname, '/public')));
 
-// Configurer la redirection vers index.html pour toutes les routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/dist/index.html'));
+// // Configurer la redirection vers index.html pour toutes les routes
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/public/index.html'));
+// });
+
+// Ajouter une redirection pour toutes les routes
+app.use((req, res, next) => {
+  if (!req.originalUrl.startsWith('/public/')) {
+    // Rediriger toutes les routes vers /public/
+    res.redirect(301, `/public${req.originalUrl}`);
+  } else {
+    next();
+  }
 });
 
 module.exports = app;
