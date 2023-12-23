@@ -102,8 +102,8 @@ function myPlanning(params) {
       legend: elm.nom+' '+elm.prenom
     };
 
-    var redirectionDeb = '<a class="redirectionDetailsReservation" href="/administration/reservation/'+elm.idReservation+'/details"> Début Réservation n°'+elm.idReservation+'</a>'
-    var redirectionFin = '<a class="redirectionDetailsReservation" href="/administration/reservation/'+elm.idReservation+'/details"> Fin Réservation n°'+elm.idReservation+'</a>'
+    var redirectionDeb = '<a class="redirectionDetailsReservation" routerLink="/administration/reservation/'+elm.idReservation+'/details"> Début Réservation n°'+elm.idReservation+'</a>'
+    var redirectionFin = '<a class="redirectionDetailsReservation" routerLink="/administration/reservation/'+elm.idReservation+'/details"> Fin Réservation n°'+elm.idReservation+'</a>'
     var tooltipDeb = {
       date: new Date(yearDateDeb, monthDateDeb, dayDateDeb),
       text: redirectionDeb

@@ -60,13 +60,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 // });
 
 // Ajouter une redirection pour toutes les routes
-app.use((req, res, next) => {
-  if (!req.originalUrl.startsWith('/public/')) {
-    // Rediriger toutes les routes vers /public/
-    res.redirect(301, `/public${req.originalUrl}`);
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if (!req.originalUrl.startsWith('/public/')) {
+//     // Rediriger toutes les routes vers /public/
+//     res.redirect(301, `/public${req.originalUrl}`);
+//   } else {
+//     next();
+//   }
+// });
 
 module.exports = app;
