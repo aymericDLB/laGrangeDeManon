@@ -73,6 +73,7 @@ async function reservationTermine(req, res) {
 function sendMail(cheminTemplate, objetDuMail, dataReservation) {
     dataReservation = dataReservation || 0;
     var data;
+    var emailDestinataire = "lagrangedemanon@gmail.com";
 
     if (dataReservation != 0) {
         //Formatage de la date de début de réservation au bon format FR
@@ -101,13 +102,15 @@ function sendMail(cheminTemplate, objetDuMail, dataReservation) {
             dateDebReservation: dateDebTmp,
             dateFinReservation: dateFinTmp,
         };
+
+        emailDestinataire = data.email;
     }
 
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'metns.974@gmail.com',
-        pass: 'hhsmkrpewtfflomd'
+        user: 'lagrangedemanon@gmail.com',
+        pass: 'yfwqhdtzwffvonnl'
       }
     });
 
@@ -123,10 +126,9 @@ function sendMail(cheminTemplate, objetDuMail, dataReservation) {
         // Générer le contenu HTML à partir des données
         const emailContent = template(data);
 
-        //dataReservation.Client.email
         const mailOptions = {
-          from: 'metns.974@gmail.com',
-          to: 'aymeric.delabarre@gmail.com',
+          from: 'lagrangedemanon@gmail.com',
+          to: emailDestinataire,
           subject: objetDuMail,
           html: emailContent
         };
