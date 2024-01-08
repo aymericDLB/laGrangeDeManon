@@ -9,8 +9,4 @@ router.post('/api/demandeReservationValideMail/:id', mailController.demandeReser
 
 router.post('/api/demandeReservationEnAttenteMail', mailController.demandeReservationEnAttenteMail);
 
-router.post('/api/reservationTermine/:id', mailController.reservationTermine);
-
-router.get('/api/recupererReservationNonNote', mailController.getListesReservationsNonNote);
-
 module.exports = router;

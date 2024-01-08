@@ -43,32 +43,19 @@ async function demandeReservationEnAttenteMail(req, res) {
     sendMail('demandeReservationEnAttenteMail', '⛰️ La grange de Manon - Réservation en attente ⛰️');
 }
 
-async function getListesReservationsNonNote(req, res) {
+async function envoieMailNotation() {
     try {
         const reservationsId = await MailService.relancerClientAvisReservation();
-        res.json(reservationsId);
+
+        reservationsId.forEach(async element => {
+            const reservation = await MailService.infoReservation(element.dataValues.idReservation);
+            sendMail('reservationTermine', '⛰️ La Grange de Manon - Votre avis nous intéresse ⛰️', reservation);
+            await PlanningService.updatePlanningNotation(element.dataValues.idReservation);
+        });
       } catch (error) {
-        console.error('Erreur lors de getListesReservationsNonNote:', error);
-        res.status(500).json({ error: 'Erreur lors de getListesReservationsNonNote.' });
+        console.error('Erreur lors de envoieMailNotation:', error);
       }
 }
-
-async function reservationTermine(req, res) {
-    try {
-        const { id } = req.params;
-        const reservation = await MailService.infoReservation(id);
-        sendMail('reservationTermine', '⛰️ La Grange de Manon - Votre avis nous intéresse ⛰️', reservation);
-        res.status(200).send({
-            status: "200",
-            message: 'Mail Sent!'
-        });
-        await PlanningService.updatePlanningNotation(id);
-      } catch (error) {
-        console.error('Erreur lors de la récupération de la réservation:', error);
-        res.status(500).json({ error: 'Erreur lors de la récupération de la réservation.' });
-    }
-}
-
 
 function sendMail(cheminTemplate, objetDuMail, dataReservation) {
     dataReservation = dataReservation || 0;
@@ -225,7 +212,6 @@ module.exports = {
     demandeReservationMail,
     demandeReservationValideMail,
     demandeReservationEnAttenteMail,
-    reservationTermine,
-    getListesReservationsNonNote
+    envoieMailNotation
 };
   
