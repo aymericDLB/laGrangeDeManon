@@ -81,6 +81,11 @@ async function getReservationsPasse() {
       model: Client,
       required: true,
       attributes: ['email']
+     },
+     {
+      model: Planning,
+      required: true,
+      attributes: ['notation']
      }],
     attributes: ['idReservation', 'acompte', 'prix', 'etat', 'dateInsertion', 'adulte', 'enfant', 'dateDebReservation', 'dateFinReservation'],
     where: {
