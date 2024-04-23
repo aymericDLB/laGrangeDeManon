@@ -399,7 +399,7 @@ function Datepickk(args) {
 						if (_highlights.length > 1) {
 							var percent = Math.round(100 / _highlights.length);
 							bgColor = 'background: linear-gradient(-45deg,';
-							for (var z = 0; z < _highlights.length; z++) {
+							for (var z = _highlights.length; z >= 0; z--) {
 								legendIds += highlight.indexOf(_highlights[z]);
 								if (z !== _highlights.length - 1) {
 									legendIds += ' ';

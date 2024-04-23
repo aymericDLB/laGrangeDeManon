@@ -15,29 +15,30 @@ async function infoReservation(idReservation) {
   return reservation;
 }
 
-async function relancerClientAvisReservation() {
-  const reservation = await Reservation.findAll({
-      include: [{
-        model: Planning,
-        required: true,
-        where: {
-          notation: {
-            [Op.eq]: 0,
-          }
-        }
-       }
-      ],
-      attributes: ['idReservation'],
-      where: {
-        dateFinReservation: {
-          [Op.lt]: new Date()
-        }
-      }
-    });
-return reservation;
-}
+// PLUS UTILISE - Etait utilisé avec le cron job pour récupérer toutes les reservation avec notation = 0
+
+// async function relancerClientAvisReservation() {
+//   const reservation = await Reservation.findAll({
+//       include: [{
+//         model: Planning,
+//         required: true,
+//         where: {
+//           notation: {
+//             [Op.eq]: 0,
+//           }
+//         }
+//        }
+//       ],
+//       attributes: ['idReservation'],
+//       where: {
+//         dateFinReservation: {
+//           [Op.lt]: new Date()
+//         }
+//       }
+//     });
+// return reservation;
+// }
 
 module.exports = {
-    infoReservation,
-    relancerClientAvisReservation
+    infoReservation
   };

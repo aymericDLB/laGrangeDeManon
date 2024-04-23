@@ -43,15 +43,26 @@ async function demandeReservationEnAttenteMail(req, res) {
     sendMail('demandeReservationEnAttenteMail', '⛰️ La grange de Manon - Réservation en attente ⛰️');
 }
 
-async function envoieMailNotation() {
-    try {
-        const reservationsId = await MailService.relancerClientAvisReservation();
+async function demandeMessageEnAttenteMail(req, res) {
+    res.status(200).send({
+        status: "200",
+        message: 'Mail Sent!'
+    })
+    sendMail('demandeMessageEnAttenteMail', '⛰️ La grange de Manon - Message en attente ⛰️');
+}
 
-        reservationsId.forEach(async element => {
-            const reservation = await MailService.infoReservation(element.dataValues.idReservation);
-            sendMail('reservationTermine', '⛰️ La Grange de Manon - Votre avis nous intéresse ⛰️', reservation);
-            await PlanningService.updatePlanningNotation(element.dataValues.idReservation);
+async function envoieMailNotation(req, res) {
+    try {
+        const { id } = req.params;
+        const reservation = await MailService.infoReservation(id);
+
+        sendMail('reservationTermine', '⛰️ La Grange de Manon - Votre avis nous intéresse ⛰️', reservation);
+        await PlanningService.updatePlanningNotation(id);
+        res.status(200).send({
+            status: "200",
+            message: 'Mail Sent!'
         });
+        
       } catch (error) {
         console.error('Erreur lors de envoieMailNotation:', error);
       }
@@ -212,6 +223,7 @@ module.exports = {
     demandeReservationMail,
     demandeReservationValideMail,
     demandeReservationEnAttenteMail,
+    demandeMessageEnAttenteMail,
     envoieMailNotation
 };
   

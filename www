@@ -12,12 +12,12 @@ var cron = require('node-cron');
 
 const mailController = require('./controllers/mailController');
 
-// Tache plannifié d'envoie de mail de notation
-cron.schedule('0 12 * * *', () =>  {
-  console.log("LANCEMENT Cronjob : ");
-  mailController.envoieMailNotation();
-  console.log("FIN Cronjob : ");
-});
+// PLUS UTILISE - Tache plannifié d'envoie de mail de notation
+// cron.schedule('0 12 * * *', () =>  {
+//   console.log("LANCEMENT Cronjob : ");
+//   mailController.envoieMailNotation();
+//   console.log("FIN Cronjob : ");
+// });
 
 
 /**

@@ -9,4 +9,8 @@ router.post('/api/demandeReservationValideMail/:id', mailController.demandeReser
 
 router.post('/api/demandeReservationEnAttenteMail', mailController.demandeReservationEnAttenteMail);
 
+router.post('/api/demandeMessageEnAttenteMail', mailController.demandeMessageEnAttenteMail);
+
+router.post('/api/demandeNotationMail/:id', mailController.envoieMailNotation);
+
 module.exports = router;
