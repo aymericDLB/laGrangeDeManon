@@ -22,8 +22,8 @@ async function getReservationsConfirme() {
   const reservations = await Reservation.findAll({
     attributes: ['dateDebReservation', 'dateFinReservation'],
     where: {
-      dateDebReservation: {
-        [Op.gt]: new Date()
+      dateFinReservation: {
+        [Op.gte]: new Date()
       },
       etat: "confirme"
     }
